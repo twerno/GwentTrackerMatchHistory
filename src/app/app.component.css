@@ -1,0 +1,19 @@
+.main-container {
+    height: auto;
+    overflow: hidden;
+}
+
+.filter-col {
+    float: left;
+    /*min-height: 100%;*/
+    /*top: 0px;
+    bottom: 0px;
+    position: fixed;*/
+}
+
+.content-col {
+    float: none;
+    margin-left: 170px;
+    overflow: hidden;
+}
+

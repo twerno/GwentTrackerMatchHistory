@@ -1,0 +1,20 @@
+.filter-row-icon {
+    color: #ab5858;
+    font-size: smaller;
+}
+
+.filter-row-selected {
+    font-weight: bold;
+}
+
+.filter-row-unselected {
+    padding-left: 16px;
+}
+
+.filter-row span {
+    cursor: pointer;
+}
+
+.filter-row .filter-row-link:hover {
+    text-decoration: underline;
+}

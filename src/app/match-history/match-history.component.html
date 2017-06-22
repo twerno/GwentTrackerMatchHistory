@@ -1,0 +1,9 @@
+<div class="entries" (scroll)="scrollHandler($event)" >
+
+    {{allMatches.length}} matches.
+    <table class="table">
+        <tr *ngFor="let match of matches" gt-match-history-row-new [match]="match">
+        </tr>
+    </table>
+
+</div>

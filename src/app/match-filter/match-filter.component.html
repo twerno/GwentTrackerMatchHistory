@@ -1,0 +1,35 @@
+<ul class="filter-list list-unstyled">
+  <li class="filter-list-element">
+    <gt-filter-row filterId="MATCH_MODE" caption="Ranked" value="RANKED" [selected]="data.mode.indexOf('RANKED') != -1" (change)="changeHandler($event)"></gt-filter-row>
+  </li>
+  <li class="filter-list-element">
+    <gt-filter-row filterId="MATCH_MODE" caption="Casual" value="CASUAL" [selected]="data.mode.indexOf('CASUAL') != -1" (change)="changeHandler($event)"></gt-filter-row>
+  </li>
+</ul>
+
+<ul class="filter-list list-unstyled">
+  <li class="filter-list-element">
+    <gt-filter-row filterId="FilterByTime" caption="Last 24 hours" value="{{FilterByTime.LAST_24_HOURS}}" [selected]="data.time.mode === FilterByTime.LAST_24_HOURS"
+      (change)="changeHandler($event)"></gt-filter-row>
+  </li>
+  <li class="filter-list-element">
+    <gt-filter-row filterId="FilterByTime" caption="Last 7 days" value="{{FilterByTime.LAST_7_DAYS}}" [selected]="data.time.mode === FilterByTime.LAST_7_DAYS"
+      (change)="changeHandler($event)"></gt-filter-row>
+  </li>
+  <li class="filter-list-element">
+    <gt-filter-row filterId="FilterByTime" caption="Last 30 days" value="{{FilterByTime.LAST_30_DAYS}}" [selected]="data.time.mode === FilterByTime.LAST_30_DAYS"
+      (change)="changeHandler($event)"></gt-filter-row>
+  </li>
+  <li class="filter-list-element">
+    <gt-filter-row filterId="FilterByTime" caption="Custom" value="{{FilterByTime.CUSTOM}}" [selected]="data.time.mode === FilterByTime.CUSTOM"
+      (change)="changeHandler($event)"></gt-filter-row>
+    <div *ngIf="data.time.mode === FilterByTime.CUSTOM" class="filter-row-unselected">
+      From:<br/>
+      <material-datepicker dateFormat="YYYY-MM-DD" [(date)]="data.time.from" (onSelect)="dateFromChangedHandler()"></material-datepicker>
+      <br/>
+      To:<br/>
+      <material-datepicker [(date)]="data.time.to" (onSelect)="dateToChangedHandler()"></material-datepicker>
+      <br/>
+    </div>
+  </li>
+</ul>

@@ -1,0 +1,4 @@
+<div class="filter-row">
+    <span *ngIf="selected" class="filter-row-icon glyphicon glyphicon-remove" aria-hidden="true" (click)="clickHandler()"></span>
+    <span class="filter-row-link" [class.filter-row-selected]="selected" [class.filter-row-unselected]="!selected" (click)="clickHandler()">{{caption}}</span>
+</div>
