@@ -2,9 +2,9 @@ var MATCHES = [
   {
     mode: 'RANKED',
     result: 'WIN',
-    timestamp: new Date(2017, 5, 1, 14, 14),
+    timestamp: new Date(2017, 5, 22, 14, 14),
 
-    player: { name: 'Tomii', mmr: 1000 },
+    player: { name: 'Tomiia', mmr: 1000 },
     playersDeckMeta: { faction: 'Monster', leader: 'Dagon' },
 
     opponent: { name: 'Agent Smith', mmr: 9000 },

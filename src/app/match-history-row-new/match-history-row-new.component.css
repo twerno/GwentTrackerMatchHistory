@@ -5,12 +5,9 @@
     display: inline-block;
     margin-left: 5px;
     margin-right: 5px;
-    /*border: 1px solid #756868;
-    border-radius: 5px;*/
 }
 
-.result-win-border {
-    border-left: #3ae03a;
+.result-win-border { 
     border-left: #66e631;
     border-left-width: 10px;
     border-left-style: solid;

@@ -13,6 +13,7 @@
 
 .filter-row span {
     cursor: pointer;
+    font-size: 13px;
 }
 
 .filter-row .filter-row-link:hover {

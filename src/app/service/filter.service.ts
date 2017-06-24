@@ -10,7 +10,7 @@ import { MATCH_MODE } from 'app/model/match-history-record';
 export class FilterService {
 
   filterData: IFilterData = {
-    mode: [],
+    mode: ['CASUAL', 'RANKED'],
     time: { mode: FilterByTime.LAST_24_HOURS, from: DateTimeHelper.nowPlusHours(-24) },
     faction: [],
     leader: []

@@ -15,14 +15,14 @@ export class Leader2IconUrlPipe implements PipeTransform {
       case 'FRANCESCA': return base + '20016500.png';
 
       case 'CRACH AN CRAITE': return base + '20016000.png';
-      case 'HARALD THE CRIPPLE': return base + '';
+      // case 'HARALD THE CRIPPLE': return base + '';
       case 'KING BRAN': return base + '20015900.png';
 
       case 'DAGON': return base + '20015800.png';
       case 'EREDIN': return base + '13110100.png';
       case 'UNSEEN ELDER': return base + '20005500.png';
 
-      case 'EMHYR VAR EMREIS': return base + '';
+      // case 'EMHYR VAR EMREIS': return base + '';
       case 'JOHN CALVEIT': return base + '20016400.png';
       case 'MORVRAN VOORHIS': return base + '20016300.png';
 
@@ -30,7 +30,7 @@ export class Leader2IconUrlPipe implements PipeTransform {
       case 'HENSELT': return base + '20017000.png';
       case 'RADOVID': return base + '20016900.png';
     }
-    return '';
+    return 'assets/neo.jpg';
   }
 
 }

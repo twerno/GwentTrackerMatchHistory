@@ -14,7 +14,7 @@ export class Faction2IconUrlPipe implements PipeTransform {
       case 'Northern Realms': return base + 'NorthernKingdom.png';
       case 'Scoia\'tael': return base + 'Scoiatael.png';
       case 'Skellige': return base + 'Skellige.png';
-      default: return '';
+      default: return 'assets/matrix.jpg';
     }
   }
 

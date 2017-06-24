@@ -5,17 +5,17 @@ li > span {
 }
 
 .filter-list {
-    padding-top: 15px;
+    padding-bottom: 15px;
     min-width: 145px;
 }
 
 .filter-list-element {
     padding-left: 10px;
-    padding-bottom: 5px;
+    padding-bottom: 1px;
 }
 
 .filter-row-unselected {
-    margin-left: 5px;
+    /*margin-left: 5px;*/
     padding: 11px;
     background-color: aliceblue;
 }
