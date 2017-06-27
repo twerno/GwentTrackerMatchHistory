@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { IMatchHistoryRecord } from 'app/model/match-history-record';
+import { GameResult } from 'app/const/game-result.enum';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -11,6 +12,8 @@ import { IMatchHistoryRecord } from 'app/model/match-history-record';
 export class MatchHistoryRowNewComponent implements OnInit {
 
   @Input() match: IMatchHistoryRecord;
+
+  GameResult: typeof GameResult = GameResult;
 
   constructor() { }
 

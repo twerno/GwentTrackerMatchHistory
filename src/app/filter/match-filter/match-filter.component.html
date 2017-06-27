@@ -1,0 +1,85 @@
+<ul class="filter-list list-unstyled">
+  <li class="filter-list-element">
+    <gt-filter-row caption="Any mode" value="ANY" [selected]="data.mode.length === 0" (change)="setGameMode($event)" [diselectable]="false"></gt-filter-row>
+  </li>
+  <li class="filter-list-element">
+    <gt-filter-row caption="Ranked" [value]="GameMode.RANKED" [selected]="data.mode.indexOf(GameMode.RANKED) != -1" (change)="setGameMode($event)"
+      [diselectable]="true"></gt-filter-row>
+  </li>
+  <li class="filter-list-element">
+    <gt-filter-row caption="Casual" [value]="GameMode.CASUAL" [selected]="data.mode.indexOf(GameMode.CASUAL) != -1" (change)="setGameMode($event)"
+      [diselectable]="true"></gt-filter-row>
+  </li>
+</ul>
+
+
+
+<ul class="filter-list list-unstyled">
+  <li class="filter-list-element">
+    <gt-filter-row caption="Any time" value="ANY" [selected]="data.time.mode === null" (change)="changeHandler($event)"></gt-filter-row>
+  </li>
+  <li class="filter-list-element">
+    <gt-filter-row caption="Last 24 hours" [value]="FilterByTime.LAST_24_HOURS" [selected]="data.time.mode === FilterByTime.LAST_24_HOURS"
+      (change)="changeHandler($event)"></gt-filter-row>
+  </li>
+  <li class="filter-list-element">
+    <gt-filter-row caption="Last 7 days" [value]="FilterByTime.LAST_7_DAYS" [selected]="data.time.mode === FilterByTime.LAST_7_DAYS"
+      (change)="changeHandler($event)"></gt-filter-row>
+  </li>
+  <li class="filter-list-element">
+    <gt-filter-row caption="Last 30 days" [value]="FilterByTime.LAST_30_DAYS" [selected]="data.time.mode === FilterByTime.LAST_30_DAYS"
+      (change)="changeHandler($event)"></gt-filter-row>
+  </li>
+  <!--<li class="filter-list-element">
+    <gt-filter-row caption="Custom" value="{{FilterByTime.CUSTOM}}" [selected]="data.time.mode === FilterByTime.CUSTOM"
+      (change)="changeHandler($event)"></gt-filter-row>
+    <div *ngIf="data.time.mode === FilterByTime.CUSTOM" class="filter-row-unselected">
+      From:<br/>
+      <material-datepicker dateFormat="YYYY-MM-DD" [(date)]="data.time.from" (onSelect)="dateFromChangedHandler()"></material-datepicker>
+      <br/>
+      To:<br/>
+      <material-datepicker [(date)]="data.time.to" (onSelect)="dateToChangedHandler()"></material-datepicker>
+      <br/>
+    </div>
+  </li>-->
+</ul>
+
+
+
+<ul class="filter-list list-unstyled">
+  <li class="filter-list-element">
+    <gt-filter-row caption="Any faction" value="ANY" [selected]="data.faction.length === 0" (change)="setFactionHandler($event)"
+      [diselectable]="false"></gt-filter-row>
+  </li>
+  <li class="filter-list-element">
+    <gt-filter-row [caption]="Faction.MONSTER | faction2String" [value]="Faction.MONSTER" [selected]="data.faction.indexOf(Faction.MONSTER) != -1"
+      (change)="setFactionHandler($event)" [diselectable]="true"></gt-filter-row>
+  </li>
+  <li class="filter-list-element">
+    <gt-filter-row caption="{{Faction.NILFGAARD | faction2String }}" [value]="Faction.NILFGAARD" [selected]="data.faction.indexOf(Faction.NILFGAARD) != -1"
+      (change)="setFactionHandler($event)" [diselectable]="true"></gt-filter-row>
+  </li>
+  <li class="filter-list-element">
+    <gt-filter-row [caption]="Faction.NORTHERN_REALMS | faction2String" [value]="Faction.NORTHERN_REALMS" [selected]="data.faction.indexOf(Faction.NORTHERN_REALMS) != -1"
+      (change)="setFactionHandler($event)" [diselectable]="true"></gt-filter-row>
+  </li>
+  <li class="filter-list-element">
+    <gt-filter-row caption="{{ Faction.SCOIATAEL | faction2String }}" [value]="Faction.SCOIATAEL" [selected]="data.faction.indexOf(Faction.SCOIATAEL) != -1"
+      (change)="setFactionHandler($event)" [diselectable]="true"></gt-filter-row>
+  </li>
+  <li class="filter-list-element">
+    <gt-filter-row caption="{{Faction.SKELLIGE | faction2String }}" [value]="Faction.SKELLIGE" [selected]="data.faction.indexOf(Faction.SKELLIGE) != -1"
+      (change)="setFactionHandler($event)" [diselectable]="true"></gt-filter-row>
+  </li>
+</ul>
+
+<ul class="filter-list list-unstyled">
+  <li class="filter-list-element">
+    <gt-filter-row caption="Any player" value="ANY" [selected]="data.playerId.length === 0" (change)="setPlayerHandler($event)"
+      [diselectable]="false"></gt-filter-row>
+  </li>
+  <li class="filter-list-element" *ngFor="let playerId of playerIds">
+    <gt-filter-row caption="{{ playerId }}" [value]="playerId" [selected]="data.playerId.indexOf(playerId) != -1" (change)="setPlayerHandler($event)"
+      [diselectable]="true"></gt-filter-row>
+  </li>
+</ul>

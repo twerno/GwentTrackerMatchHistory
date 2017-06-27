@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { IMatchHistoryRecord } from 'app/model/match-history-record';
-import { MatchService } from 'app/service/match.service';
 import { Subscription } from 'rxjs/Subscription';
+import { FilterService } from 'app/service/filter.service';
 
 @Component({
   selector: 'gt-match-history',
@@ -10,41 +10,41 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class MatchHistoryComponent implements OnInit, OnDestroy {
 
-  private matchesSubscription: Subscription;
+  private matchSubscription: Subscription;
   allMatches: IMatchHistoryRecord[] = [];
   matches: IMatchHistoryRecord[] = [];
 
   loaded_pages: number = 1;
-  records_per_page: number = 100;
+  records_per_page: number = 15;
 
-  constructor(private matchService: MatchService) {
-    this.matchesSubscription = matchService.matchesSubject
+  constructor(private filterService: FilterService) {
+    this.matchSubscription = filterService.matchSubject
       .subscribe((value) => {
         this.allMatches = value;
         this.loaded_pages = 1;
-        this.prepareMatchesSubset();
+        this.partialViewUpdate();
       });
   }
 
   ngOnInit() {
-    this.allMatches = this.matchService.defaultMatches;
-    this.prepareMatchesSubset();
+    this.allMatches = this.filterService.matches;
+    this.partialViewUpdate();
   }
 
   ngOnDestroy(): void {
-    this.matchesSubscription.unsubscribe();
+    this.matchSubscription.unsubscribe();
   }
 
-  private prepareMatchesSubset(): void {
+  private partialViewUpdate(): void {
     this.matches = this.allMatches.slice(0, this.records_per_page * this.loaded_pages);
   }
 
   @HostListener('window:scroll', ['$event'])
   onScrollEvent($event) {
     const height: number = document.body.offsetHeight;
-    if (window.pageYOffset >= height - 1000) {
+    if (window.pageYOffset >= height - screen.availHeight) {
       this.loaded_pages++;
-      this.prepareMatchesSubset();
+      this.partialViewUpdate();
     }
   }
 

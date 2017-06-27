@@ -1,77 +1,51 @@
 import { Injectable } from '@angular/core';
+import { FFilterBuilder } from 'app/helper/ffilter.builder';
+import { IMatchHistoryRecord } from 'app/model/match-history-record';
 import { IFilterData, FFilter } from 'app/model/filter-record';
-import { DateTimeHelper } from 'app/helper/date-time.helper';
-import { MatchService } from 'app/service/match.service';
-import { FilterByTime } from 'app/model/filter-by-time.enum';
-import { FilterHelper } from 'app/helper/filter.helper';
-import { MATCH_MODE } from 'app/model/match-history-record';
+import { MatchDataProviderService } from 'app/service/match-data-provider.service';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class FilterService {
 
-  filterData: IFilterData = {
-    mode: ['CASUAL', 'RANKED'],
-    time: { mode: FilterByTime.LAST_24_HOURS, from: DateTimeHelper.nowPlusHours(-24) },
-    faction: [],
-    leader: []
-  };
+  matches: IMatchHistoryRecord[] = [];
+  matchSubject: Subject<IMatchHistoryRecord[]> = new Subject<IMatchHistoryRecord[]>();
 
-  constructor(private matchService: MatchService) {
-    matchService.applyFFilters(this.getFFilters());
+
+  constructor(private matchService: MatchDataProviderService) { }
+
+
+  applyFilter(filter: IFilterData): void {
+    const fFilters: FFilter[] = this.buildFFilters(filter);
+    this.doFilterMatches(fFilters);
   }
 
-  setTime(mode: FilterByTime, from?: Date, to?: Date): void {
-    this.filterData.time.mode = mode;
-    this.filterData.time.from = null;
-    this.filterData.time.to = null;
-
-    switch (mode) {
-      case FilterByTime.LAST_24_HOURS: { this.filterData.time.from = DateTimeHelper.nowPlusHours(-24); break; }
-      case FilterByTime.LAST_7_DAYS: { this.filterData.time.from = DateTimeHelper.nowPlusDays(-7); break; }
-      case FilterByTime.LAST_30_DAYS: { this.filterData.time.from = DateTimeHelper.nowPlusDays(-30); break; }
-      case FilterByTime.CUSTOM: {
-        this.filterData.time.to = to || this.filterData.time.to || new Date();
-        this.filterData.time.from = from || this.filterData.time.from || DateTimeHelper.nowPlusDays(-7);
-
-        if (this.filterData.time.to.getTime() < this.filterData.time.from.getTime()) {
-          this.filterData.time.from = DateTimeHelper.plusDays(this.filterData.time.to, -7);
-        }
-
-        DateTimeHelper.normalizeFullDays(this.filterData.time.from);
-        DateTimeHelper.normalizeFullDays(this.filterData.time.to);
-
-      }; break;
-      default: this.filterData.time.mode = null;
-    }
-
-    this.update();
-  }
-
-  addMatchMode(mode: MATCH_MODE): void {
-    this.filterData.mode.push(mode);
-    this.update();
-  }
-
-  removeMatchMode(mode: MATCH_MODE): void {
-    let index: number = this.filterData.mode.indexOf(mode);
-    while (index !== -1) {
-      this.filterData.mode.splice(index, 1);
-      index = this.filterData.mode.indexOf(mode);
-    }
-
-    this.update();
-  }
-
-  getFFilters(): FFilter[] {
+  private buildFFilters(filter: IFilterData): FFilter[] {
     const result: FFilter[] = [];
-    result.push(FilterHelper.filterByMode(this.filterData.mode));
-    result.push(FilterHelper.filterByTime(this.filterData.time));
+    result.push(FFilterBuilder.byMode(filter.mode));
+    result.push(FFilterBuilder.byTime(filter.time));
+    result.push(FFilterBuilder.byFaction(filter.faction));
+    result.push(FFilterBuilder.byPlayerId(filter.playerId));
 
     return result;
   }
 
-  update(): void {
-    this.matchService.applyFFilters(this.getFFilters());
+  private doFilterMatches(fFilters: FFilter[]): void {
+
+    const matches: IMatchHistoryRecord[] = this.matchService.getAllMatches()
+      .filter((match) => {
+        for (const fFilter of fFilters || []) {
+          if (!fFilter(match)) {
+            return false;
+          }
+        }
+        return true;
+      })
+      .sort((a: IMatchHistoryRecord, b: IMatchHistoryRecord) => {
+        return b.timestamp.getTime() - a.timestamp.getTime();
+      });
+    this.matchSubject.next(matches);
+    this.matches = matches;
   }
 
 

@@ -1,25 +1,27 @@
 
 import { FilterByTime } from 'app/model/filter-by-time.enum';
-import { IMatchHistoryRecord, MATCH_MODE } from 'app/model/match-history-record';
+import { IMatchHistoryRecord } from 'app/model/match-history-record';
+import { Faction } from 'app/const/faction.enum';
+import { GameMode } from 'app/const/game-mode.enum';
 
 export type FFilter = (match: IMatchHistoryRecord) => boolean;
 
 export interface IFilterData {
 
-    mode: MATCH_MODE[],
+    mode: GameMode[],
 
     time: ITimeFilterData
 
-    faction: string[],
+    faction: Faction[],
 
-    leader: string[],
+    playerId: string[],
 
     deck?: string[]
 
 }
 
 export interface ITimeFilterData {
-    mode: FilterByTime,
+    mode: FilterByTime | 'ANY',
     from?: Date,
     to?: Date
 }

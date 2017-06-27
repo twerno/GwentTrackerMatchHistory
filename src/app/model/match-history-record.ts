@@ -1,16 +1,14 @@
 
-export type MATCH_MODE = 'RANKED' | 'CASUAL';
-
-export type MATCH_RESULT = 'WIN' | 'LOSS' | 'DRAW';
-
-export type FACTION = 'Monster' | 'Nilfgaard' | 'Northern Realms' | 'Scoia\'tael' | 'Skellige' | string;
+import { Faction } from 'app/const/faction.enum';
+import { GameResult } from 'app/const/game-result.enum';
+import { GameMode } from 'app/const/game-mode.enum';
 
 export type LEADER = string;
 
 export interface IMatchHistoryRecord {
-    mode: MATCH_MODE,
+    mode: GameMode,
     timestamp: Date,
-    result: MATCH_RESULT
+    result: GameResult
 
     player: IPlayerRecord,
     playersDeckMeta: IDeckMeta,
@@ -26,6 +24,6 @@ export interface IPlayerRecord {
 }
 
 export interface IDeckMeta {
-    faction: FACTION,
+    faction: Faction,
     leader: LEADER
 }

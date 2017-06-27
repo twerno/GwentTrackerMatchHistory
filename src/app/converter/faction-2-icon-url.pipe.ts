@@ -1,19 +1,20 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { FACTION } from 'app/model/match-history-record';
+import { Faction } from 'app/const/faction.enum';
+
 
 @Pipe({
   name: 'faction2IconUrl'
 })
 export class Faction2IconUrlPipe implements PipeTransform {
 
-  transform(value: FACTION, args?: any): any {
+  transform(value: Faction, args?: any): any {
     const base: string = 'http://www.gwent-tracker.com/img/art/backs/';
     switch (value) {
-      case 'Monster': return base + 'Monster.png';
-      case 'Nilfgaard': return base + 'Nilfgaard.png';
-      case 'Northern Realms': return base + 'NorthernKingdom.png';
-      case 'Scoia\'tael': return base + 'Scoiatael.png';
-      case 'Skellige': return base + 'Skellige.png';
+      case Faction.MONSTER: return base + 'Monster.png';
+      case Faction.NILFGAARD: return base + 'Nilfgaard.png';
+      case Faction.NORTHERN_REALMS: return base + 'NorthernKingdom.png';
+      case Faction.SCOIATAEL: return base + 'Scoiatael.png';
+      case Faction.SKELLIGE: return base + 'Skellige.png';
       default: return 'assets/matrix.jpg';
     }
   }

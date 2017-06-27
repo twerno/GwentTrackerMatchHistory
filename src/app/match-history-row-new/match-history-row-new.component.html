@@ -1,12 +1,16 @@
-<td [class.result-win-border]="match.result === 'WIN'" [class.result-loss-border]="match.result === 'LOSS'" [class.result-draw-border]="match.result === 'DRAW'">{{match.mode}}</td>
-<td>{{match.result}}</td>
-<td>{{match.timestamp | date:'medium'}}</td>
-<td>{{match.player.name}} #{{match.player.mmr}}</td>
+<!--<td [class.result-win-border]="match.result === GameResult.WIN" [class.result-loss-border]="match.result === GameResult.LOSS"
+  [class.result-draw-border]="match.result === GameResult.DRAW">-->
+<td>
+  {{ match.mode | gameMode }}
+</td>
+<td>{{ match.result | gameResult }}</td>
+<td>{{ match.timestamp | date:'medium' }}</td>
+<td>{{ match.player.name }} #{{ match.player.mmr }}</td>
 <td>
   <img class="faction right" [src]="match.playersDeckMeta.faction | faction2IconUrl" />
   <img class="faction right" [src]="match.playersDeckMeta.leader | leader2IconUrl" />
 </td>
-<td>{{match.opponent.name}} #{{match.opponent.mmr}}</td>
+<td>{{ match.opponent.name }} #{{ match.opponent.mmr }}</td>
 <td>
   <img class="faction right" [src]="match.opponentsDeckMeta.faction | faction2IconUrl" />
   <img class="faction right" [src]="match.opponentsDeckMeta.leader | leader2IconUrl" />

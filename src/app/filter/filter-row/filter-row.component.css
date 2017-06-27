@@ -4,10 +4,11 @@
 }
 
 .filter-row-selected {
-    font-weight: bold;
+    text-decoration: underline;
+    color: #ecf5e2;
 }
 
-.filter-row-unselected {
+.filter-row-spacer {
     padding-left: 16px;
 }
 
