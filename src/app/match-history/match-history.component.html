@@ -1,8 +1,33 @@
-<div class="entries" (scroll)="scrollHandler($event)" >
+<div class="entries" (scroll)="scrollHandler($event)">
 
     {{allMatches.length}} matches.
     <table class="table">
-        <tr *ngFor="let match of matches" gt-match-history-row-new [match]="match">
+        <tr *ngFor="let match of matches">
+            <td>
+                {{ match.mode | gameMode }}
+            </td>
+            <td>{{ match.result | gameResult }}</td>
+            <td>
+                <div style=" width:95px; ">{{ match.timestamp | date2StringAgo }}</div>
+            </td>
+
+            <td>
+                <img class="faction right " [src]="match.playersDeckMeta.faction | faction2IconUrl " />
+                <img class="faction right " [src]="match.playersDeckMeta.leader | leader2IconUrl " />
+                <div class="playersCol ">
+                    <div>{{ match.player.name }}</div>
+                    <small>{{ match.player.mmr }}</small>
+                </div>
+            </td>
+
+            <td>
+                <img class="faction right " [src]="match.opponentsDeckMeta.faction | faction2IconUrl " />
+                <img class="faction right " [src]="match.opponentsDeckMeta.leader | leader2IconUrl " />
+                <div class="playersCol ">
+                    <div>{{ match.opponent.name }}</div>
+                    <small>{{ match.opponent.mmr }}</small>
+                </div>
+            </td>
         </tr>
     </table>
 

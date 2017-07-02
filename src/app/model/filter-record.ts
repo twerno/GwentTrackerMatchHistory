@@ -14,9 +14,9 @@ export interface IFilterData {
 
     faction: Faction[],
 
-    playerId: string[],
+    playerId: string[]
 
-    deck?: string[]
+    // deck?: string[]
 
 }
 

@@ -10,12 +10,13 @@ export class FilterService {
 
   matches: IMatchHistoryRecord[] = [];
   matchSubject: Subject<IMatchHistoryRecord[]> = new Subject<IMatchHistoryRecord[]>();
+  currentFilterData: IFilterData = null;
 
-
-  constructor(private matchService: MatchDataProviderService) { }
-
+  constructor(private matchService: MatchDataProviderService) {
+  }
 
   applyFilter(filter: IFilterData): void {
+    this.currentFilterData = filter;
     const fFilters: FFilter[] = this.buildFFilters(filter);
     this.doFilterMatches(fFilters);
   }
@@ -31,11 +32,10 @@ export class FilterService {
   }
 
   private doFilterMatches(fFilters: FFilter[]): void {
-
     const matches: IMatchHistoryRecord[] = this.matchService.getAllMatches()
-      .filter((match) => {
+      .filter((game) => {
         for (const fFilter of fFilters || []) {
-          if (!fFilter(match)) {
+          if (!fFilter(game)) {
             return false;
           }
         }

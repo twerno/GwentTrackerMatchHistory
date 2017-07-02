@@ -16,7 +16,7 @@
 
 <ul class="filter-list list-unstyled">
   <li class="filter-list-element">
-    <gt-filter-row caption="Any time" value="ANY" [selected]="data.time.mode === null" (change)="changeHandler($event)"></gt-filter-row>
+    <gt-filter-row caption="Any time" value="ANY" [selected]="data.time.mode === 'ANY'" (change)="changeHandler($event)"></gt-filter-row>
   </li>
   <li class="filter-list-element">
     <gt-filter-row caption="Last 24 hours" [value]="FilterByTime.LAST_24_HOURS" [selected]="data.time.mode === FilterByTime.LAST_24_HOURS"

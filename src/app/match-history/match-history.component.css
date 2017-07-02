@@ -1,0 +1,56 @@
+.table {
+    border: 0px;
+}
+
+.faction {
+    height: 35px;
+    position: relative;
+    /*top: -2px;*/
+    margin-top: 3px;
+    display: inline-block;
+    margin-left: 3px;
+    margin-right: 3px;
+    border: 1px solid #7b7575;
+}
+
+.result-win-border {
+    border-left: #66e631;
+    border-left-width: 10px;
+    border-left-style: solid;
+}
+
+.result-loss-border {
+    border-left: #f75a5a;
+    border-left-width: 10px;
+    border-left-style: solid;
+}
+
+.result-draw-border {
+    border-left: #f7d660;
+    border-left-width: 10px;
+    border-left-style: solid;
+}
+
+td {
+    background-color: #444444;
+    border: 0px solid #7b7575;
+    border-bottom: 4px solid #333333;
+    border-top: 4px solid #333333 !important;
+    vertical-align: middle !important;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+.playersCol {
+    max-width: 400px;
+    display: inline-grid;
+    vertical-align: bottom;
+}
+
+.playersCol div {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

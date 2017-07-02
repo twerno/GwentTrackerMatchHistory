@@ -20,3 +20,15 @@
 .filter-row .filter-row-link:hover {
     text-decoration: underline;
 }
+
+.filter-row {
+    cursor: pointer;
+}
+
+.filter-row div {
+    max-width: 120px;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+    word-wrap: normal; 
+}

@@ -2,6 +2,8 @@ import { FFilter, ITimeFilterData } from 'app/model/filter-record';
 import { IMatchHistoryRecord } from 'app/model/match-history-record';
 import { Faction } from 'app/const/faction.enum';
 import { GameMode } from 'app/const/game-mode.enum';
+import { FilterByTime } from 'app/model/filter-by-time.enum';
+import { DateTimeHelper } from 'app/helper/date-time.helper';
 
 export class FFilterBuilder {
 
@@ -19,17 +21,22 @@ export class FFilterBuilder {
 
     static byTime(filterData: ITimeFilterData): FFilter {
         return (gameRecord: IMatchHistoryRecord): boolean => {
-            if (filterData.from instanceof Date
-                && gameRecord.timestamp.getTime() < filterData.from.getTime()) {
-                return false;
+            if (filterData.mode === 'ANY') {
+                return true;
+            } else if (filterData.mode === FilterByTime.LAST_24_HOURS
+                && gameRecord.timestamp.getTime() >= DateTimeHelper.nowPlusHours(-24).getTime()) {
+                return true;
+            } else if (filterData.mode === FilterByTime.LAST_7_DAYS
+                && gameRecord.timestamp.getTime() >= DateTimeHelper.nowPlusDays(-7).getTime()) {
+                return true;
+            } else if (filterData.mode === FilterByTime.LAST_30_DAYS
+                && gameRecord.timestamp.getTime() >= DateTimeHelper.nowPlusDays(-30).getTime()) {
+                return true;
+            } else if (filterData.mode === FilterByTime.CUSTOM) {
+                return true;
+                // TODO
             }
-
-            if (filterData.to instanceof Date
-                && gameRecord.timestamp.getTime() > filterData.to.getTime()) {
-                return false;
-            }
-
-            return true;
+            return false;
         }
     }
 

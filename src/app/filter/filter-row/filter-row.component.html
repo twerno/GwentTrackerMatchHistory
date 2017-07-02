@@ -1,5 +1,3 @@
 <div class="filter-row">
-    <span *ngIf="selected && diselectable; else spacer" class="filter-row-icon glyphicon glyphicon-remove" aria-hidden="true" (click)="unselectHandler()"></span>
-    <ng-template #spacer><span class="filter-row-spacer"></span></ng-template>
-    <span class="filter-row-link" [class.filter-row-selected]="selected" (click)="selectHandler()">{{caption}}</span>
+    <div class="filter-row-link" [@state]="state" [class.filter-row-selected]="selected" (click)="clickHandler()">{{caption}}</div>
 </div>

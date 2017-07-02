@@ -5,33 +5,36 @@ import { FilterByTime } from 'app/model/filter-by-time.enum';
 import { Faction } from 'app/const/faction.enum';
 import { GameMode } from 'app/const/game-mode.enum';
 import { FilterService } from 'app/service/filter.service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { QueryParamHelper } from 'app/helper/query-param.helper';
 
 @Injectable()
 export class FilterDataService {
 
   filterData: IFilterData = {
     mode: [],
-    time: { mode: FilterByTime.LAST_24_HOURS, from: DateTimeHelper.nowPlusHours(-24) },
+    time: { mode: 'ANY' },
     faction: [],
     playerId: []
   };
 
-  constructor(private filterService: FilterService) {
-    this.applyFilter();
+  constructor(private filterService: FilterService,
+    private router: Router,
+    private route: ActivatedRoute) {
   }
 
   // ***************************************
   // Filter by Time
   // ***************************************
-  setTime(mode: FilterByTime, from?: Date, to?: Date): void {
+  setTime(mode: FilterByTime | 'ANY', from?: Date, to?: Date): void {
     this.filterData.time.mode = mode;
     this.filterData.time.from = null;
     this.filterData.time.to = null;
 
     switch (mode) {
-      case FilterByTime.LAST_24_HOURS: { this.filterData.time.from = DateTimeHelper.nowPlusHours(-24); break; }
-      case FilterByTime.LAST_7_DAYS: { this.filterData.time.from = DateTimeHelper.nowPlusDays(-7); break; }
-      case FilterByTime.LAST_30_DAYS: { this.filterData.time.from = DateTimeHelper.nowPlusDays(-30); break; }
+      case FilterByTime.LAST_24_HOURS: break;
+      case FilterByTime.LAST_7_DAYS: break;
+      case FilterByTime.LAST_30_DAYS: break;
       case FilterByTime.CUSTOM: {
         this.filterData.time.to = to || this.filterData.time.to || new Date();
         this.filterData.time.from = from || this.filterData.time.from || DateTimeHelper.nowPlusDays(-7);
@@ -44,7 +47,7 @@ export class FilterDataService {
         DateTimeHelper.normalizeFullDays(this.filterData.time.to);
 
       }; break;
-      default: this.filterData.time.mode = null;
+      default: this.filterData.time.mode = 'ANY';
     }
 
     this.applyFilter();
@@ -123,7 +126,9 @@ export class FilterDataService {
   // private
   // ***************************************
   private applyFilter(): void {
-    this.filterService.applyFilter(this.filterData);
+    this.router.navigate(['index.html'], {
+      queryParams: QueryParamHelper.build('history', this.filterData)
+    });
   }
 
 }

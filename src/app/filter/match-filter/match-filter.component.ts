@@ -24,7 +24,8 @@ export class MatchFilterComponent implements OnInit {
   GameResult: typeof GameResult = GameResult;
   GameMode: typeof GameMode = GameMode;
 
-  constructor(private filterService: FilterDataService, private matchDataProviderService: MatchDataProviderService) { }
+  constructor(private filterService: FilterDataService,
+    private matchDataProviderService: MatchDataProviderService) { }
 
   ngOnInit() {
     this.data = this.filterService.filterData;
@@ -37,12 +38,12 @@ export class MatchFilterComponent implements OnInit {
   }
 
   changeHandler(event: FilterEvent): void {
-      if (event.action === FilterActionEnum.SELECTED) {
-        const filterVal: FilterByTime = <FilterByTime>Number.parseInt(event.value);
-        this.filterService.setTime(filterVal);
-      } else {
-        this.filterService.setTime(null);
-      }
+    if (event.action === FilterActionEnum.SELECTED) {
+      const filterVal: FilterByTime = <FilterByTime>Number.parseInt(event.value);
+      this.filterService.setTime(filterVal);
+    } else {
+      this.filterService.setTime('ANY');
+    }
   }
 
   setGameMode(event: FilterEvent): void {
