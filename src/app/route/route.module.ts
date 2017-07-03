@@ -11,10 +11,14 @@ export function historyUrlMatcher(segments: UrlSegment[], group: UrlSegmentGroup
     return null;
   }
 }
+export function historyFixer(segments: UrlSegment[], group: UrlSegmentGroup, route: Route): UrlMatchResult {
+  window.location.href = window.location.href + '?page=history'
+  return null;
+}
 
 export const appRoutes: Routes = [
   { matcher: historyUrlMatcher, component: MatchHistoryComponent },
-  { path: '**', component: MatchHistoryComponent }
+  { matcher: historyFixer, component: MatchHistoryComponent }
 ];
 
 @NgModule({
