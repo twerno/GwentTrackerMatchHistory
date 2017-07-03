@@ -25,7 +25,7 @@ export class QueryParamHelper {
         }
 
         if (filterData.playerId.length !== 0) {
-            result['filter.playerId'] = filterData.playerId;
+            result['filter.playerId'] = JSON.stringify(filterData.playerId);
         }
 
         return result;
